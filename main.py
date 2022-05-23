@@ -2,21 +2,20 @@ from flask import Flask ,request,jsonify
 import numpy as np
 import pickle
 import sklearn
-print(sklearn.__version__)
 model = pickle.load(open('pipe2.pkl','rb'))
 
 app =Flask(__name__)
 
 @app.route('/predict',methods = ['POST'])
 def index():
-    preg = request.form.get('Pregnancies')
-    glu = request.form.get('Glucose')
-    bp = request.form.get('BloodPressure')
-    st = request.form.get('SkinThickness')
-    ins = request.form.get('Insulin')
-    bmi = request.form.get('BMI')
-    dpf = request.form.get('DiabetesPedigreeFunction')
-    age = request.form.get('Age')
+    preg = int(request.form.get('Pregnancies'))
+    glu = int(request.form.get('Glucose'))
+    bp = int(request.form.get('BloodPressure'))
+    st = int(request.form.get('SkinThickness'))
+    ins = int(request.form.get('Insulin'))
+    bmi = float(request.form.get('BMI'))
+    dpf = float(request.form.get('DiabetesPedigreeFunction'))
+    age = int(request.form.get('Age'))
 
     input = np.array([[preg,glu,bp,st,ins,bmi,dpf,age]])
 
